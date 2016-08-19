@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import com.omarmohamed.githubuserlist.R;
 import com.omarmohamed.githubuserlist.fragments.UsersListFragment;
-import com.omarmohamed.githubuserlist.models.UserItem.User;
+import com.omarmohamed.githubuserlist.models.User;
+import com.omarmohamed.githubuserlist.network.DownloadImageTask;
 
 import java.util.List;
 
@@ -38,9 +39,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mUser = mValues.get(position);
-        //TODO:Set the proper image
-        holder.mAvatarView.setImageResource(R.mipmap.ic_launcher);
-        holder.mNameView.setText(mValues.get(position).content);
+        //holder.mAvatarView.setImageResource(R.mipmap.ic_launcher);
+        //Setting up dinamically the relative avatar image from URL
+        new DownloadImageTask(holder.mAvatarView).execute(mValues.get(position).getAvatarUrl());
+        holder.mNameView.setText(mValues.get(position).getLogin());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

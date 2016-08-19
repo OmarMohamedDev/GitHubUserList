@@ -14,6 +14,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //Add the list fragment to the container
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, UsersListFragment.newInstance(1)).commit();
+        getFragmentManager().beginTransaction().add(R.id.fragment_container, UsersListFragment.newInstance()).commit();
     }
 }
