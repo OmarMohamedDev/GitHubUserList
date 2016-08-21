@@ -75,7 +75,7 @@ public class ConnectionDetector {
                     b.putBoolean("status", status);
                     msg.setData(b);
                 } catch (IOException e) {
-
+                    //Connection problem
                 }
                 messageHandler.sendMessage(msg);
             }

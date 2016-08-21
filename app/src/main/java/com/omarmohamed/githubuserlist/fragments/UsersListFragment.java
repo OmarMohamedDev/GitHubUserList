@@ -61,6 +61,7 @@ public class UsersListFragment extends Fragment {
 
         //if the the device where the app runs is connected to the internet, we try to retrieve
         //the data from the github servers, otherwise we ask to the user to connect and retry
+        //if (Utilities.hasActiveInternetConnection(context)) {
         if (Utilities.hasActiveInternetConnection(context)) {
             //Retrieving the userlist
             userList = Utilities.retrieveGithubUsers();

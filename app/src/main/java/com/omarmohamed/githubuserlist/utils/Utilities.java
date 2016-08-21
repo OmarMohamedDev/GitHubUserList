@@ -41,7 +41,7 @@ public class Utilities {
      */
     public static boolean hasActiveInternetConnection(Context context) {
         ConnectionDetector connectionDetector = new ConnectionDetector(context);
-        return connectionDetector.hasActiveInternetConnection();
+        return connectionDetector.isConnectingToInternet() || connectionDetector.hasActiveInternetConnection();
     }
 
 }
