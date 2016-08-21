@@ -15,18 +15,16 @@ import com.omarmohamed.githubuserlist.network.DownloadImageTask;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link User} and makes a call to the
- * specified {@link UsersListFragment.OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * {@link RecyclerView.Adapter} that can display a {@link User}
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private final List<User> mValues;
-    private final UsersListFragment.OnListFragmentInteractionListener mListener;
+    private final UsersListFragment.OnItemClickListener mOnItemClickListener;
 
-    public UserAdapter(List<User> items, UsersListFragment.OnListFragmentInteractionListener listener) {
+    public UserAdapter(List<User> items, UsersListFragment.OnItemClickListener onItemClickListener) {
         mValues = items;
-        mListener = listener;
+        mOnItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -37,7 +35,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mUser = mValues.get(position);
         //holder.mAvatarView.setImageResource(R.mipmap.ic_launcher);
         //Setting up dinamically the relative avatar image from URL
@@ -47,14 +45,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mUser);
+                if (null != mOnItemClickListener) {
+                    // Notify the active callbacks interface that an item has been selected.
+                    holder.bind(holder.mUser, holder.mView, position, mOnItemClickListener);
                 }
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -72,6 +70,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             mView = view;
             mAvatarView = (ImageView) view.findViewById(R.id.avatar);
             mNameView = (TextView) view.findViewById(R.id.name);
+        }
+
+        public void bind(final User user, final View view, final int position, final UsersListFragment.OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(view, position);
+                }
+            });
         }
 
         @Override
