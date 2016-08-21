@@ -1,12 +1,12 @@
 package com.omarmohamed.githubuserlist.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.omarmohamed.githubuserlist.R;
 import com.omarmohamed.githubuserlist.fragments.UsersListFragment;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

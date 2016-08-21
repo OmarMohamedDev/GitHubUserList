@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omarmohamed.githubuserlist">
 
+    <!-- In order to retrieve the data from the github servers -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- In order to check if the app is connected to the internet -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"

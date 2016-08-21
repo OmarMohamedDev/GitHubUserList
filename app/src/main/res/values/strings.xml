@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHub User List</string>
+    <string name="network_not_available">The network connection is not available. Connect to the internet to load the list of users.</string>
 </resources>
