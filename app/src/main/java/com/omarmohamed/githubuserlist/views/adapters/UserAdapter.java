@@ -1,5 +1,6 @@
 package com.omarmohamed.githubuserlist.views.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import com.omarmohamed.githubuserlist.R;
 import com.omarmohamed.githubuserlist.fragments.UsersListFragment;
 import com.omarmohamed.githubuserlist.models.User;
-import com.omarmohamed.githubuserlist.network.DownloadImageTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,10 +22,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private final List<User> mValues;
     private final UsersListFragment.OnItemClickListener mOnItemClickListener;
+    private final Context mContext;
 
-    public UserAdapter(List<User> items, UsersListFragment.OnItemClickListener onItemClickListener) {
+    public UserAdapter(List<User> items, Context context, UsersListFragment.OnItemClickListener onItemClickListener) {
         mValues = items;
         mOnItemClickListener = onItemClickListener;
+        mContext = context;
     }
 
     @Override
@@ -36,10 +39,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        //Retrieving user for the current view
         holder.mUser = mValues.get(position);
-        //holder.mAvatarView.setImageResource(R.mipmap.ic_launcher);
+
+        //Retrieving standard dimension for avatar size
+        int avatarStandardDimen = (int) mContext.getResources().getDimension(R.dimen.avatar_standard_dimension);
+
         //Setting up dinamically the relative avatar image from URL
-        new DownloadImageTask(holder.mAvatarView).execute(mValues.get(position).getAvatarUrl());
+        Picasso.with(mContext)
+                .load(mValues.get(position).getAvatarUrl())
+                .resize(avatarStandardDimen, avatarStandardDimen)
+                .centerCrop()
+                .placeholder(R.drawable.user_placeholder)
+                .error(R.drawable.user_placeholder_error)
+                .into(holder.mAvatarView);
+//        new DownloadImageTask(holder.mAvatarView).execute(mValues.get(position).getAvatarUrl());
         holder.mNameView.setText(mValues.get(position).getLogin());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

@@ -97,7 +97,7 @@ public class UsersListFragment extends Fragment {
         //TODO: Refactor onItemClick / onItemTouch mechanism
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mOnItemClickListener));
         //Setting up the adapter
-        recyclerView.setAdapter(new UserAdapter(mUserList, mOnItemClickListener));
+        recyclerView.setAdapter(new UserAdapter(mUserList, getActivity(), mOnItemClickListener));
         return view;
     }
 

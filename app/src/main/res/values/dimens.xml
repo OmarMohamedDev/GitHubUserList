@@ -5,4 +5,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="avatar_margin">16dp</dimen>
     <dimen name="cardview_bottom_margin">10dp</dimen>
+    <dimen name="avatar_standard_dimension">100dp</dimen>
 </resources>
