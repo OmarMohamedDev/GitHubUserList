@@ -53,7 +53,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 .placeholder(R.drawable.user_placeholder)
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.mAvatarView);
-//        new DownloadImageTask(holder.mAvatarView).execute(mValues.get(position).getAvatarUrl());
         holder.mNameView.setText(mValues.get(position).getLogin());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
