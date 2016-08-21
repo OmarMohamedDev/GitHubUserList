@@ -12,4 +12,11 @@ public class Constants {
     public static class URLs {
         public static String BASE_URL_GITHUB = "https://api.github.com/";
     }
+
+    /**
+     * Constants used for pagination purpose
+     */
+    public static class Pagination {
+        public static int USERS_PER_PAGE = 30;
+    }
 }

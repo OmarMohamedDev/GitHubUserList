@@ -34,6 +34,8 @@ dependencies {
     compile 'com.android.support:design:24.1.1'
     //To improve avatar loading/caching UX
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //For infinite scroll of the recycler view
+    compile 'com.vinaysshenoy:mugen:1.0.2'
 
     testCompile 'junit:junit:4.12'
     compile 'javax.annotation:javax.annotation-api:1.2'

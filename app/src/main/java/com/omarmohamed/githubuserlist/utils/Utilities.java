@@ -20,9 +20,9 @@ public class Utilities {
      *
      * @return a List of User Objects
      */
-    public static List<User> retrieveGithubUsers() {
+    public static List<User> retrieveGithubUsers(int lastUserSeen) {
         try {
-            return new RetrieveUsersListTask().execute().get();
+            return new RetrieveUsersListTask().execute(new Integer[]{lastUserSeen}).get();
             //TODO: Manage catch properly
         } catch (InterruptedException e) {
             e.printStackTrace();

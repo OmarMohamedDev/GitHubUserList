@@ -16,11 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by omarmohamed on 19/08/2016.
  */
 
-public class RetrieveUsersListTask extends AsyncTask<String, Void, List<User>> {
+public class RetrieveUsersListTask extends AsyncTask<Integer, Void, List<User>> {
 
-    private Exception exception;
-
-    protected List<User> doInBackground(String... urls) {
+    protected List<User> doInBackground(Integer... lastUserSeen) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.URLs.BASE_URL_GITHUB)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -29,7 +27,7 @@ public class RetrieveUsersListTask extends AsyncTask<String, Void, List<User>> {
         GitHubService service = retrofit.create(GitHubService.class);
 
         try {
-            return service.listUsers().execute().body();
+            return service.listUsers(lastUserSeen[0]).execute().body();
         } catch (IOException e) {
             //TODO: Setup the try/catch properly
             e.printStackTrace();
