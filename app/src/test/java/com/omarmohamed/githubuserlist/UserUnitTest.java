@@ -60,7 +60,7 @@ public class UserUnitTest {
         assertEquals("url", user.getUrl());
         assertEquals(new Integer(0), user.getId());
         assertEquals(true, user.getSiteAdmin());
-        
+
     }
 
     @Test
