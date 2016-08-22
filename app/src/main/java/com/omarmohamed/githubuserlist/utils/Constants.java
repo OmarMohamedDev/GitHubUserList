@@ -17,6 +17,7 @@ public class Constants {
      * Constants used for pagination purpose
      */
     public static class Pagination {
-        public static int USERS_PER_PAGE = 30;
+        public static int USERS_PER_PAGE = 200;
+        public static int INITIAL_USERS_PER_PAGE = 30;
     }
 }

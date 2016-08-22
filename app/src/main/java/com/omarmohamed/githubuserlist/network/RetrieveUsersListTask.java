@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * AsyncTask used to retrieve the user list from the GitHub Servers
+ * ATTENTION: The GITHUB APIs has a limit for non-authenticated request of 60 requests per hour
  * Created by omarmohamed on 19/08/2016.
  */
 

@@ -83,7 +83,7 @@ public class UsersListFragment extends Fragment {
         if (Utilities.hasActiveInternetConnection(context)) {
             //Retrieving the userlist
             mUserList = Utilities.retrieveGithubUsers(mUsersAlreadyLoaded);
-            mUsersAlreadyLoaded += Constants.Pagination.USERS_PER_PAGE;
+            mUsersAlreadyLoaded = Constants.Pagination.INITIAL_USERS_PER_PAGE;
         } else {
             Snackbar.make(view, R.string.network_not_available, Snackbar.LENGTH_INDEFINITE).show();
             //TODO: Manage the empty list case (at the moment we just don't display nothing)
@@ -109,10 +109,20 @@ public class UsersListFragment extends Fragment {
                 * Do your load operation here.
                 * Note: this is NOT asynchronous!
                 */
-                // mUserList.clear();
-                mUserList.addAll(Utilities.retrieveGithubUsers(mUsersAlreadyLoaded / Constants.Pagination.USERS_PER_PAGE));
-                mUsersAlreadyLoaded += Constants.Pagination.USERS_PER_PAGE;
-                recyclerView.getAdapter().notifyDataSetChanged();
+
+                //Retrieving new users that have to be loaded
+                List<User> newUsersLoaded = Utilities.retrieveGithubUsers(mUsersAlreadyLoaded);
+
+                //If there are problems retrieving the new users due to GitHub server problems
+                //or if the app exceed the API Rate Limit, we show an error message
+                //Otherwise we load the new user in the userlist and update the UI
+                if (newUsersLoaded == null) {
+                    Snackbar.make(getView(), R.string.users_list_not_available, Snackbar.LENGTH_INDEFINITE).show();
+                } else {
+                    mUserList.addAll(newUsersLoaded);
+                    mUsersAlreadyLoaded += Constants.Pagination.USERS_PER_PAGE;
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -124,7 +134,7 @@ public class UsersListFragment extends Fragment {
                 *
                 * If there is no load operation ongoing, return false
                 */
-                return false; //Check
+                return false;
             }
 
             @Override
@@ -152,11 +162,13 @@ public class UsersListFragment extends Fragment {
         //the touch events to improve the UX
         //TODO: Refactor onItemClick / onItemTouch mechanism
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mOnItemClickListener));
-        //Setting up the adapter
+        //If the list is empty due to Github server problem or if the app exceed the API Rate Limit, we show an error message
         if (mUserList == null) {
             mUserList = new ArrayList<>();
+
             Snackbar.make(view, R.string.users_list_not_available, Snackbar.LENGTH_INDEFINITE).show();
         }
+        //Setting up the adapter
         recyclerView.setAdapter(new UserAdapter(mUserList, getActivity(), mOnItemClickListener));
         return view;
     }
