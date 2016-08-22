@@ -30,14 +30,8 @@ public class RetrieveUsersListTask extends AsyncTask<Integer, Void, List<User>> 
         try {
             return service.listUsers(lastUserSeen[0]).execute().body();
         } catch (IOException e) {
-            //TODO: Setup the try/catch properly
             e.printStackTrace();
             return null;
         }
-    }
-
-    protected void onPostExecute(User user) {
-        // TODO: check this.exception
-        // TODO: do something with the feed
     }
 }

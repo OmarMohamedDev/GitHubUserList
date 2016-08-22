@@ -86,9 +86,6 @@ public class UsersListFragment extends Fragment {
             mUsersAlreadyLoaded = Constants.Pagination.INITIAL_USERS_PER_PAGE;
         } else {
             Snackbar.make(view, R.string.network_not_available, Snackbar.LENGTH_INDEFINITE).show();
-            //TODO: Manage the empty list case (at the moment we just don't display nothing)
-            //TODO: Check periodically if the user connected to the internet in order to load the list
-            //TODO: Add progress bar when loading the list of users
         }
 
         //Setting up the onItemClickListener
@@ -117,7 +114,9 @@ public class UsersListFragment extends Fragment {
                 //or if the app exceed the API Rate Limit, we show an error message
                 //Otherwise we load the new user in the userlist and update the UI
                 if (newUsersLoaded == null) {
-                    Snackbar.make(getView(), R.string.users_list_not_available, Snackbar.LENGTH_INDEFINITE).show();
+                    if (getView() != null) {
+                        Snackbar.make(getView(), R.string.users_list_not_available, Snackbar.LENGTH_INDEFINITE).show();
+                    }
                 } else {
                     mUserList.addAll(newUsersLoaded);
                     mUsersAlreadyLoaded += Constants.Pagination.USERS_PER_PAGE;
@@ -160,7 +159,6 @@ public class UsersListFragment extends Fragment {
 
         //Setting up the onItemTouchListener to avoid unexpected behavior and give the chance to customize
         //the touch events to improve the UX
-        //TODO: Refactor onItemClick / onItemTouch mechanism
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mOnItemClickListener));
         //If the list is empty due to Github server problem or if the app exceed the API Rate Limit, we show an error message
         if (mUserList == null) {
@@ -182,7 +180,7 @@ public class UsersListFragment extends Fragment {
         GestureDetector mGestureDetector;
         private OnItemClickListener mListener;
 
-        public RecyclerItemClickListener(Context context, OnItemClickListener listener) {
+        RecyclerItemClickListener(Context context, OnItemClickListener listener) {
             mListener = listener;
             mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

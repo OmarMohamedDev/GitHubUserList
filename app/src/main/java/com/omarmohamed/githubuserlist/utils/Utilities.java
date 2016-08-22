@@ -23,7 +23,6 @@ public class Utilities {
     public static List<User> retrieveGithubUsers(int lastUserSeen) {
         try {
             return new RetrieveUsersListTask().execute(new Integer[]{lastUserSeen}).get();
-            //TODO: Manage catch properly
         } catch (InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -36,7 +35,7 @@ public class Utilities {
     /**
      * Check if the device is connected or not to the Internet
      *
-     * @param context
+     * @param context app context
      * @return true if is connected, false otherwise
      */
     public static boolean hasActiveInternetConnection(Context context) {
