@@ -27,9 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * interface.
+ * A fragment that contains a list of Users
  */
 public class UsersListFragment extends Fragment {
 
@@ -47,13 +45,9 @@ public class UsersListFragment extends Fragment {
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * fragment
      */
     public UsersListFragment() {
-    }
-
-    public static UsersListFragment newInstance() {
-        return new UsersListFragment();
     }
 
     @Override
@@ -124,6 +118,7 @@ public class UsersListFragment extends Fragment {
                 }
             }
 
+
             @Override
             public boolean isLoading() {
                 /* Return true if a load operation is ongoing. This will
@@ -154,7 +149,7 @@ public class UsersListFragment extends Fragment {
 
         /* Use this to change when the onLoadMore() function is called.
         * By default, it is called when the scroll reaches 2 items from the bottom */
-        attacher.setLoadMoreOffset(4);
+        attacher.setLoadMoreOffset(Constants.Pagination.LOAD_MORE_OFFSET);
 
 
         //Setting up the onItemTouchListener to avoid unexpected behavior and give the chance to customize

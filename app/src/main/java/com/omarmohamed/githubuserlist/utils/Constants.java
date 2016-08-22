@@ -19,5 +19,6 @@ public class Constants {
     public static class Pagination {
         public static int USERS_PER_PAGE = 200;
         public static int INITIAL_USERS_PER_PAGE = 30;
+        public static int LOAD_MORE_OFFSET = 4;
     }
 }

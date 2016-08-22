@@ -9,11 +9,11 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Interface that represent the GitHub service
+ * Interface that represent the GitHub service request
  * Created by omarmohamed on 17/08/2016.
  */
 
-public interface GitHubService {
+interface GitHubService {
     @GET("users")
     Call<List<User>> listUsers(@Query("since") int page);
 }

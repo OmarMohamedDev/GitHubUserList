@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.omarmohamed.githubuserlist.R;
 import com.omarmohamed.githubuserlist.fragments.UsersListFragment;
 
+/**
+ * Main activity of the app that simply contain a fragment container
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -14,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Add the list fragment to the container
-        getFragmentManager().beginTransaction().add(R.id.fragment_container, UsersListFragment.newInstance()).commit();
+        getFragmentManager().beginTransaction().add(R.id.fragment_container, new UsersListFragment()).commit();
     }
 }
