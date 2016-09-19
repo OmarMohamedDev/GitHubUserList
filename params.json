@@ -1,0 +1,6 @@
+{
+  "name": "Githubuserlist",
+  "tagline": "App that simply display the list of users of GitHub using the GitHub APIs and following the Material Design Guidelines",
+  "body": "# GitHubUserList\r\nApp that simply display the list of users of GitHub using the GitHub APIs and following the Material Design Guidelines\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
